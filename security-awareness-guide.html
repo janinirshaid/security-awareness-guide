@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security Awareness Guide — Stay Safe Online</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --ink-soft: #4a4a6a;
+    --ink-muted: #8888aa;
+    --cream: #faf9f6;
+    --cream-dark: #f0ede6;
+    --accent: #c0392b;
+    --accent-soft: #fdf0ef;
+    --safe: #1a6b3c;
+    --safe-soft: #edf7f2;
+    --warn: #c07800;
+    --warn-soft: #fdf8ed;
+    --info: #1a4a7a;
+    --info-soft: #edf2fb;
+    --border: rgba(26,26,46,0.1);
+    --shadow: 0 2px 20px rgba(26,26,46,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    background: rgba(250,249,246,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    padding: 0 2rem;
+  }
+  .nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .nav-logo .shield { color: var(--accent); font-size: 20px; }
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* HERO */
+  .hero {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5rem 2rem 3.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: center;
+  }
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 480px;
+    line-height: 1.65;
+  }
+  .hero-badge {
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1.4;
+    padding: 1rem;
+  }
+  .hero-badge .big { font-family: 'DM Serif Display', serif; font-size: 28px; letter-spacing: 0; display: block; margin-bottom: 2px; }
+
+  /* DIVIDER */
+  .divider {
+    max-width: 900px;
+    margin: 0 auto 3rem;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--ink-muted);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* TOC */
+  .toc {
+    max-width: 900px;
+    margin: 0 auto 4rem;
+    padding: 0 2rem;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+  .toc-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.1rem;
+    text-decoration: none;
+    color: var(--ink);
+    transition: box-shadow 0.2s, transform 0.2s;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .toc-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+  .toc-icon { font-size: 22px; flex-shrink: 0; }
+  .toc-label { font-size: 14px; font-weight: 500; line-height: 1.35; }
+  .toc-num { font-size: 11px; color: var(--ink-muted); margin-bottom: 2px; font-weight: 400; }
+
+  /* SECTIONS */
+  .section {
+    max-width: 900px;
+    margin: 0 auto 5rem;
+    padding: 0 2rem;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .section.visible { opacity: 1; transform: translateY(0); }
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  .section-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3.5rem;
+    line-height: 1;
+    color: var(--cream-dark);
+    flex-shrink: 0;
+    width: 56px;
+    text-align: center;
+  }
+  .section-title-block { padding-top: 0.25rem; }
+  .section-tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+  .section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.9rem;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  /* CALLOUT BOXES */
+  .callout {
+    border-radius: 10px;
+    padding: 1.1rem 1.25rem;
+    margin: 1.25rem 0;
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+    font-size: 15px;
+  }
+  .callout-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .callout-body { flex: 1; }
+  .callout-title { font-weight: 600; font-size: 14px; margin-bottom: 0.2rem; }
+  .callout.danger { background: var(--accent-soft); border: 1px solid rgba(192,57,43,0.15); }
+  .callout.danger .callout-icon, .callout.danger .callout-title { color: var(--accent); }
+  .callout.safe { background: var(--safe-soft); border: 1px solid rgba(26,107,60,0.15); }
+  .callout.safe .callout-icon, .callout.safe .callout-title { color: var(--safe); }
+  .callout.warn { background: var(--warn-soft); border: 1px solid rgba(192,120,0,0.15); }
+  .callout.warn .callout-icon, .callout.warn .callout-title { color: var(--warn); }
+  .callout.info { background: var(--info-soft); border: 1px solid rgba(26,74,122,0.15); }
+  .callout.info .callout-icon, .callout.info .callout-title { color: var(--info); }
+
+  /* EXAMPLE EMAILS */
+  .email-demo {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+    box-shadow: var(--shadow);
+  }
+  .email-demo-label {
+    padding: 0.6rem 1.1rem;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .email-demo-label.bad { background: var(--accent-soft); color: var(--accent); }
+  .email-demo-label.good { background: var(--safe-soft); color: var(--safe); }
+  .email-header {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 0.9rem 1.25rem;
+    background: var(--cream);
+    font-size: 13.5px;
+    display: grid;
+    gap: 0.25rem;
+  }
+  .email-header span { color: var(--ink-muted); }
+  .email-header strong { color: var(--ink); }
+  .email-body { padding: 1.1rem 1.25rem; font-size: 14.5px; line-height: 1.7; }
+  .annotation {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    border-radius: 3px;
+    padding: 0 5px;
+    font-size: 12px;
+    font-weight: 600;
+    vertical-align: middle;
+    margin-left: 3px;
+    cursor: pointer;
+    position: relative;
+  }
+  .annotation.safe-ann { background: var(--safe); }
+  .annotation-tip {
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--ink);
+    color: white;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 0.4rem 0.7rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    display: none;
+    z-index: 10;
+    pointer-events: none;
+  }
+  .annotation:hover .annotation-tip { display: block; }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; margin: 1rem 0; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 15px;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-box {
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, border-color 0.15s;
+    font-size: 12px;
+    color: transparent;
+  }
+  .check-box.checked { background: var(--safe); border-color: var(--safe); color: white; }
+
+  /* TWO COL */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+  .col-card {
+    border-radius: 10px;
+    padding: 1.1rem 1.15rem;
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+  .col-card h4 { font-size: 13px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.6rem; }
+  .col-card.red { background: var(--accent-soft); color: var(--ink); }
+  .col-card.red h4 { color: var(--accent); }
+  .col-card.green { background: var(--safe-soft); color: var(--ink); }
+  .col-card.green h4 { color: var(--safe); }
+  .col-card ul { padding-left: 1.1rem; }
+  .col-card li { margin-bottom: 0.3rem; }
+
+  /* ESCALATION */
+  .escalation-steps { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
+  .esc-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 0;
+    position: relative;
+    font-size: 15px;
+  }
+  .esc-step:first-child { border-radius: 10px 10px 0 0; }
+  .esc-step:last-child { border-radius: 0 0 10px 10px; }
+  .esc-step + .esc-step { border-top: none; }
+  .esc-step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .esc-step-body strong { display: block; font-size: 14px; margin-bottom: 2px; }
+  .esc-step-body p { color: var(--ink-soft); font-size: 13.5px; }
+
+  /* PASSWORD TABLE */
+  .strength-table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 14.5px; }
+  .strength-table th { text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 600; color: var(--ink-muted); padding: 0.5rem 0.75rem; border-bottom: 2px solid var(--border); }
+  .strength-table td { padding: 0.65rem 0.75rem; border-bottom: 1px solid var(--border); }
+  .strength-table tr:last-child td { border-bottom: none; }
+  .badge-pill { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+  .badge-pill.weak { background: var(--accent-soft); color: var(--accent); }
+  .badge-pill.medium { background: var(--warn-soft); color: var(--warn); }
+  .badge-pill.strong { background: var(--safe-soft); color: var(--safe); }
+
+  /* MFA VISUAL */
+  .mfa-flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 1.5rem 0;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .mfa-step {
+    flex: 1;
+    padding: 1.25rem 1rem;
+    text-align: center;
+    font-size: 13.5px;
+    position: relative;
+  }
+  .mfa-step + .mfa-step::before {
+    content: '→';
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: var(--ink-muted);
+  }
+  .mfa-step .step-icon { font-size: 28px; display: block; margin-bottom: 0.4rem; }
+  .mfa-step strong { display: block; font-size: 13px; margin-bottom: 0.15rem; font-weight: 600; }
+  .mfa-step p { color: var(--ink-soft); font-size: 12.5px; line-height: 1.5; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--ink-muted);
+  }
+  .footer-author { font-weight: 500; color: var(--ink); }
+
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--accent);
+    width: 0%;
+    z-index: 200;
+    transition: width 0.1s;
+  }
+
+  @media (max-width: 600px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-badge { display: none; }
+    .two-col { grid-template-columns: 1fr; }
+    .mfa-flow { flex-direction: column; }
+    .mfa-step + .mfa-step::before { content: '↓'; left: 50%; top: -10px; transform: translateX(-50%); }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <span class="shield">🛡</span>
+      Security Awareness Guide
+    </div>
+    <ul class="nav-links">
+      <li><a href="#phishing">Phishing</a></li>
+      <li><a href="#passwords">Passwords</a></li>
+      <li><a href="#mfa">MFA</a></li>
+      <li><a href="#browsing">Safe Browsing</a></li>
+      <li><a href="#escalation">When to Report</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">Employee Security Awareness</div>
+    <h1>Stay Safe.<br><em>Stay Smart.</em></h1>
+    <p class="hero-sub">A plain-language guide to protecting yourself and your organization from the most common cyber threats — no technical background needed.</p>
+  </div>
+  <div class="hero-badge">
+    <span class="big">5</span>
+    topics<br>covered
+  </div>
+</div>
+
+<div class="divider">Contents</div>
+
+<div class="toc">
+  <div class="toc-grid">
+    <a class="toc-card" href="#phishing">
+      <div class="toc-icon">🎣</div>
+      <div><div class="toc-num">01</div><div class="toc-label">Recognizing Phishing Emails</div></div>
+    </a>
+    <a class="toc-card" href="#links">
+      <div class="toc-icon">🔗</div>
+      <div><div class="toc-num">02</div><div class="toc-label">Suspicious Links & Attachments</div></div>
+    </a>
+    <a class="toc-card" href="#passwords">
+      <div class="toc-icon">🔑</div>
+      <div><div class="toc-num">03</div><div class="toc-label">Password Security</div></div>
+    </a>
+    <a class="toc-card" href="#mfa">
+      <div class="toc-icon">📱</div>
+      <div><div class="toc-num">04</div><div class="toc-label">Multi-Factor Authentication</div></div>
+    </a>
+    <a class="toc-card" href="#browsing">
+      <div class="toc-icon">🌐</div>
+      <div><div class="toc-num">05</div><div class="toc-label">Safe Browsing Practices</div></div>
+    </a>
+    <a class="toc-card" href="#escalation">
+      <div class="toc-icon">📢</div>
+      <div><div class="toc-num">06</div><div class="toc-label">When & How to Report</div></div>
+    </a>
+  </div>
+</div>
+
+<!-- SECTION 1: PHISHING -->
+<div class="section" id="phishing">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div class="section-title-block">
+      <div class="section-tag">Most common threat</div>
+      <h2>Recognizing Phishing Emails</h2>
+    </div>
+  </div>
+
+  <p style="font-size:16px; color:var(--ink-soft); margin-bottom:1.25rem;">Phishing emails are fake messages designed to trick you into giving up passwords, clicking harmful links, or sending money. They often look very real. Here's how to spot them.</p>
+
+  <div class="callout warn">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-body">
+      <div class="callout-title">Key rule</div>
+      If an email creates urgency, threatens consequences, or asks for sensitive information — slow down and verify before acting.
+    </div>
+  </div>
+
+  <p style="margin:1.5rem 0 0.75rem; font-weight:500;">Red flag example — hover the numbered badges to see what's wrong:</p>
+
+  <div class="email-demo">
+    <div class="email-demo-label bad">⚠ Phishing email example</div>
+    <div class="email-header">
+      <div><span>From: </span><strong>IT-Support@microsofft-helpdesk.com <span class="annotation">1<span class="annotation-tip">Misspelled domain — not Microsoft</span></span></strong></div>
+      <div><span>To: </span><strong>you@yourcompany.com</strong></div>
+      <div><span>Subject: </span><strong>URGENT: Your account will be suspended in 24 hours <span class="annotation">2<span class="annotation-tip">Urgency + threats = pressure tactic</span></span></strong></div>
+    </div>
+    <div class="email-body">
+      <p>Dear Valued Employee, <span class="annotation">3<span class="annotation-tip">Generic greeting — not your name</span></span></p><br>
+      <p>We have detected suspicious activity on your account. You must verify your credentials immediately or your account will be <strong>permanently deleted</strong>. <span class="annotation">4<span class="annotation-tip">Threatening consequences to create panic</span></span></p><br>
+      <p>Click here to verify now: <span style="color:#185FA5; text-decoration:underline;">http://secure-microsoft-login.xyz/verify <span class="annotation">5<span class="annotation-tip">Suspicious URL — not a real Microsoft domain</span></span></span></p><br>
+      <p>Regards,<br>Microsoft Support Team <span class="annotation">6<span class="annotation-tip">No contact info, no official signature</span></span></p>
+    </div>
+  </div>
+
+  <p style="margin:1.5rem 0 0.75rem; font-weight:500;">What a legitimate IT email looks like:</p>
+
+  <div class="email-demo">
+    <div class="email-demo-label good">✓ Legitimate email example</div>
+    <div class="email-header">
+      <div><span>From: </span><strong>helpdesk@yourcompany.com <span class="annotation safe-ann">✓<span class="annotation-tip">Official company domain</span></span></strong></div>
+      <div><span>To: </span><strong>Jane Smith</strong></div>
+      <div><span>Subject: </span><strong>Password reset confirmation <span class="annotation safe-ann">✓<span class="annotation-tip">Calm, specific subject</span></span></strong></div>
+    </div>
+    <div class="email-body">
+      <p>Hi Jane, <span class="annotation safe-ann">✓<span class="annotation-tip">Uses your actual name</span></span></p><br>
+      <p>Your password was successfully reset. If you did not request this change, please contact IT at extension 4400 or reply to this email. <span class="annotation safe-ann">✓<span class="annotation-tip">Gives you a way to verify independently</span></span></p><br>
+      <p>No action is needed if you made this change yourself.</p><br>
+      <p>— IT Help Desk, Your Company<br><span style="color:var(--ink-muted); font-size:13px;">helpdesk@yourcompany.com | ext. 4400 <span class="annotation safe-ann">✓<span class="annotation-tip">Real contact information</span></span></span></p>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top:1.5rem;">
+    <div class="col-card red">
+      <h4>🚩 Red flags</h4>
+      <ul>
+        <li>Sender address doesn't match the company</li>
+        <li>Generic greeting ("Dear Customer")</li>
+        <li>Urgent threats or deadlines</li>
+        <li>Requests for passwords or payment</li>
+        <li>Suspicious or misspelled links</li>
+        <li>Unexpected attachments</li>
+      </ul>
+    </div>
+    <div class="col-card green">
+      <h4>✅ Good signs</h4>
+      <ul>
+        <li>Sender matches a known company domain</li>
+        <li>Uses your real name</li>
+        <li>No pressure to act immediately</li>
+        <li>Provides a way to verify independently</li>
+        <li>Clear contact info in signature</li>
+        <li>Grammar and spelling are correct</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2: LINKS & ATTACHMENTS -->
+<div class="section" id="links">
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div class="section-title-block">
+      <div class="section-tag">Before you click</div>
+      <h2>Suspicious Links & Attachments</h2>
+    </div>
+  </div>
+
+  <p style="font-size:16px; color:var(--ink-soft); margin-bottom:1.25rem;">Links and file attachments are the two most common ways malware gets onto computers. Here's what to check before you ever click.</p>
+
+  <div class="callout info">
+    <div class="callout-icon">💡</div>
+    <div class="callout-body">
+      <div class="callout-title">Hover before you click</div>
+      On a computer, hover your mouse over any link and look at the bottom of your browser window — it shows the real destination URL before you visit it.
+    </div>
+  </div>
+
+  <p style="margin:1.5rem 0 0.75rem; font-weight:500;">How to read a URL:</p>
+
+  <div style="background:white; border:1px solid var(--border); border-radius:10px; padding:1.25rem; font-family:monospace; font-size:15px; margin-bottom:1.25rem; overflow-x:auto;">
+    <div style="margin-bottom:0.75rem;">
+      <span style="color:var(--safe); font-weight:700;">https://</span><span style="color:var(--info); font-weight:700;">paypal.com</span><span style="color:var(--ink-soft)">/login/verify</span>
+      <span style="display:block; font-family:'DM Sans',sans-serif; font-size:12px; color:var(--ink-muted); margin-top:4px;">✅ Safe — correct domain, secure (https)</span>
+    </div>
+    <div style="border-top:1px solid var(--border); padding-top:0.75rem;">
+      <span style="color:var(--warn); font-weight:700;">http://</span><span style="color:var(--accent); font-weight:700;">paypal-secure-login.xyz</span><span style="color:var(--ink-soft)">/verify</span>
+      <span style="display:block; font-family:'DM Sans',sans-serif; font-size:12px; color:var(--ink-muted); margin-top:4px;">🚩 Suspicious — fake domain, no https, strange extension (.xyz)</span>
+    </div>
+  </div>
+
+  <div class="callout danger">
+    <div class="callout-icon">🚫</div>
+    <div class="callout-body">
+      <div class="callout-title">Never open these attachment types from unknown senders</div>
+      .exe &nbsp;·&nbsp; .zip (unexpected) &nbsp;·&nbsp; .docm / .xlsm (macro-enabled Office files) &nbsp;·&nbsp; .js &nbsp;·&nbsp; .bat &nbsp;·&nbsp; .vbs &nbsp;— When in doubt, contact the sender through a separate channel to confirm they sent it.
+    </div>
+  </div>
+
+  <div class="callout safe">
+    <div class="callout-icon">✅</div>
+    <div class="callout-body">
+      <div class="callout-title">Generally safe to open from trusted senders</div>
+      .pdf &nbsp;·&nbsp; .docx &nbsp;·&nbsp; .xlsx &nbsp;·&nbsp; .png / .jpg — Still be cautious if you weren't expecting the file.
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3: PASSWORDS -->
+<div class="section" id="passwords">
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <div class="section-title-block">
+      <div class="section-tag">Your first line of defense</div>
+      <h2>Password Security</h2>
+    </div>
+  </div>
+
+  <p style="font-size:16px; color:var(--ink-soft); margin-bottom:1.5rem;">Weak or reused passwords are one of the top causes of account breaches. Creating strong passwords doesn't have to be complicated.</p>
+
+  <table class="strength-table">
+    <thead>
+      <tr>
+        <th>Example password</th>
+        <th>Strength</th>
+        <th>Why</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>password123</code></td>
+        <td><span class="badge-pill weak">Weak</span></td>
+        <td>Common word + predictable numbers</td>
+      </tr>
+      <tr>
+        <td><code>Tr0ub4dor!</code></td>
+        <td><span class="badge-pill medium">Medium</span></td>
+        <td>Substitutions are easy for attackers to guess</td>
+      </tr>
+      <tr>
+        <td><code>correct-horse-battery-staple</code></td>
+        <td><span class="badge-pill strong">Strong</span></td>
+        <td>4 random words — long, memorable, hard to crack</td>
+      </tr>
+      <tr>
+        <td><code>xK#8mP!qLz@2vN</code></td>
+        <td><span class="badge-pill strong">Strong</span></td>
+        <td>Random characters — best used with a password manager</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout info" style="margin-top:1.5rem;">
+    <div class="callout-icon">🔐</div>
+    <div class="callout-body">
+      <div class="callout-title">Use a password manager</div>
+      Tools like <strong>Bitwarden</strong> (free), <strong>1Password</strong>, or <strong>LastPass</strong> generate and remember strong passwords for every site so you only need to remember one master password.
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top:1rem;">
+    <div class="col-card red">
+      <h4>❌ Never do this</h4>
+      <ul>
+        <li>Reuse the same password across sites</li>
+        <li>Use personal info (birthday, pet's name)</li>
+        <li>Share passwords via email or chat</li>
+        <li>Write passwords on sticky notes</li>
+        <li>Use passwords shorter than 12 characters</li>
+      </ul>
+    </div>
+    <div class="col-card green">
+      <h4>✅ Always do this</h4>
+      <ul>
+        <li>Use a unique password for every account</li>
+        <li>Make passwords at least 12–16 characters</li>
+        <li>Use a password manager</li>
+        <li>Change passwords if you suspect a breach</li>
+        <li>Enable MFA (see next section)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4: MFA -->
+<div class="section" id="mfa">
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <div class="section-title-block">
+      <div class="section-tag">Extra layer of protection</div>
+      <h2>Multi-Factor Authentication (MFA)</h2>
+    </div>
+  </div>
+
+  <p style="font-size:16px; color:var(--ink-soft); margin-bottom:1.25rem;">MFA means using a second step to verify it's really you when logging in — even if someone steals your password, they can't get in without your phone or device.</p>
+
+  <div class="mfa-flow">
+    <div class="mfa-step">
+      <span class="step-icon">🔤</span>
+      <strong>Step 1</strong>
+      <p>Enter your username and password as usual</p>
+    </div>
+    <div class="mfa-step">
+      <span class="step-icon">📱</span>
+      <strong>Step 2</strong>
+      <p>Approve a prompt on your phone or enter a short code</p>
+    </div>
+    <div class="mfa-step">
+      <span class="step-icon">✅</span>
+      <strong>You're in</strong>
+      <p>Both steps verified — your account is protected</p>
+    </div>
+  </div>
+
+  <div class="callout danger" style="margin-top:1.25rem;">
+    <div class="callout-icon">🚨</div>
+    <div class="callout-body">
+      <div class="callout-title">MFA fatigue attacks — know this</div>
+      If you receive repeated MFA approval requests that you didn't trigger, do NOT approve them. This is an attacker hoping you'll click "approve" to make them stop. Report it to IT immediately.
+    </div>
+  </div>
+
+  <div class="callout safe" style="margin-top:1rem;">
+    <div class="callout-icon">📲</div>
+    <div class="callout-body">
+      <div class="callout-title">Best MFA methods (most to least secure)</div>
+      <strong>1.</strong> Hardware security key (e.g. YubiKey) &nbsp;·&nbsp; <strong>2.</strong> Authenticator app (Google Authenticator, Microsoft Authenticator) &nbsp;·&nbsp; <strong>3.</strong> Push notification &nbsp;·&nbsp; <strong>4.</strong> SMS text code — (avoid if possible; SIM swapping is a risk)
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5: SAFE BROWSING -->
+<div class="section" id="browsing">
+  <div class="section-header">
+    <div class="section-num">05</div>
+    <div class="section-title-block">
+      <div class="section-tag">Everyday habits</div>
+      <h2>Safe Browsing Practices</h2>
+    </div>
+  </div>
+
+  <p style="font-size:16px; color:var(--ink-soft); margin-bottom:1.25rem;">Most security incidents start with a single click. These habits take seconds and protect both you and your organization.</p>
+
+  <p style="font-weight:500; margin-bottom:0.5rem;">Daily browsing checklist — click to check off:</p>
+  <ul class="checklist" id="checklist">
+    <li><div class="check-box" onclick="toggleCheck(this)">✓</div><div>Look for <strong>https://</strong> and the padlock icon before entering any personal or login information</div></li>
+    <li><div class="check-box" onclick="toggleCheck(this)">✓</div><div>Don't use public Wi-Fi for work tasks — use your company VPN or a personal hotspot instead</div></li>
+    <li><div class="check-box" onclick="toggleCheck(this)">✓</div><div>Lock your computer (<strong>Windows+L</strong> or <strong>Ctrl+Command+Q</strong> on Mac) whenever you step away</div></li>
+    <li><div class="check-box" onclick="toggleCheck(this)">✓</div><div>Keep your browser and operating system updated — updates patch security holes</div></li>
+    <li><div class="check-box" onclick="toggleCheck(this)">✓</div><div>Don't install browser extensions or software without IT approval</div></li>
+    <li><div class="check-box" onclick="toggleCheck(this)">✓</div><div>Use your work device for work, and personal devices for personal use — don't mix them</div></li>
+    <li><div class="check-box" onclick="toggleCheck(this)">✓</div><div>Be skeptical of pop-ups that say your computer is infected — close them, don't click</div></li>
+  </ul>
+</div>
+
+<!-- SECTION 6: ESCALATION -->
+<div class="section" id="escalation">
+  <div class="section-header">
+    <div class="section-num">06</div>
+    <div class="section-title-block">
+      <div class="section-tag">When something feels wrong</div>
+      <h2>When & How to Report</h2>
+    </div>
+  </div>
+
+  <p style="font-size:16px; color:var(--ink-soft); margin-bottom:1.5rem;">Reporting a suspicious email or incident is never an overreaction. The earlier IT knows about a threat, the faster they can protect everyone. Here's what to do:</p>
+
+  <div class="escalation-steps">
+    <div class="esc-step">
+      <div class="esc-step-num">1</div>
+      <div class="esc-step-body">
+        <strong>Stop — don't click, reply, or forward</strong>
+        <p>If something feels wrong, pause. Don't interact with the email, link, or file any further.</p>
+      </div>
+    </div>
+    <div class="esc-step">
+      <div class="esc-step-num">2</div>
+      <div class="esc-step-body">
+        <strong>Report it to IT immediately</strong>
+        <p>Use your company's "Report Phishing" button in Outlook/Gmail, or email/call the IT help desk directly. Don't worry about being wrong — false alarms are fine.</p>
+      </div>
+    </div>
+    <div class="esc-step">
+      <div class="esc-step-num">3</div>
+      <div class="esc-step-body">
+        <strong>If you already clicked — still report it</strong>
+        <p>Tell IT what happened, what you clicked, and when. Acting fast limits the damage. There's no judgment — it happens to everyone.</p>
+      </div>
+    </div>
+    <div class="esc-step">
+      <div class="esc-step-num">4</div>
+      <div class="esc-step-body">
+        <strong>Change your password if credentials were entered</strong>
+        <p>If you typed a username or password on a suspicious page, change that password immediately — and any accounts that share the same password.</p>
+      </div>
+    </div>
+    <div class="esc-step">
+      <div class="esc-step-num">5</div>
+      <div class="esc-step-body">
+        <strong>Don't share details with coworkers before IT responds</strong>
+        <p>Well-meaning forwarding of phishing emails can spread the attack. Let IT handle communication.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout safe" style="margin-top:1.5rem;">
+    <div class="callout-icon">💬</div>
+    <div class="callout-body">
+      <div class="callout-title">Remember</div>
+      Security is a team effort. You are not expected to be an expert — you're expected to stay alert and ask for help when something feels off. No question is too small.
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="footer-author">Janin Irshaid</div>
+    <div style="margin-top:2px;">Security Awareness Guide · Loyola University Chicago, Cybersecurity</div>
+  </div>
+  <div style="text-align:right;">
+    Created for general office staff<br>
+    Non-technical reference guide
+  </div>
+</footer>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const pct = (doc.scrollTop) / (doc.scrollHeight - doc.clientHeight) * 100;
+    document.getElementById('progress').style.width = pct + '%';
+  });
+
+  // Intersection observer for section animations
+  const sections = document.querySelectorAll('.section');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  sections.forEach(s => obs.observe(s));
+
+  // Checklist toggle
+  function toggleCheck(el) {
+    el.classList.toggle('checked');
+  }
+</script>
+</body>
+</html>
